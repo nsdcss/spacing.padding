@@ -1,0 +1,64 @@
+/*------------------------------------*\
+    $PADDING
+\*------------------------------------*/
+
+.set-modified-paddings(@counter, @bpClass: ~'') when (@counter > 0) {
+	.set-modified-paddings((@counter - 1), @bpClass);
+	@cur-list: extract(@u__multiplier-list, @counter);
+	@cur-modifier-name: extract(@cur-list, 1);
+	@cur-modifier-value: extract(@cur-list, 2);
+
+
+	.@{cf__framework-prefix}padding--@{cur-modifier-name}@{bpClass} {
+		padding: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}padding-left--@{cur-modifier-name}@{bpClass} {
+		padding-left: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-left: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}padding-right--@{cur-modifier-name}@{bpClass} {
+		padding-right: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-right: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}padding-top--@{cur-modifier-name}@{bpClass} {
+		padding-top: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-top: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}padding-bottom--@{cur-modifier-name}@{bpClass} {
+		padding-bottom: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-bottom: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}padding-hor--@{cur-modifier-name}@{bpClass} {
+		padding-left: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-left: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+		padding-right: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-right: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}padding-vert--@{cur-modifier-name}@{bpClass} {
+		padding-top: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-top: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+		padding-bottom: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		padding-bottom: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+}
+
+.make-responsive-paddings(@counter) when (@counter > 0) {
+	.make-responsive-paddings((@counter - 1)); // next iteration
+	@cur-list: extract(@bp__bp-list, @counter);
+	@breakpoint-name:  extract(@cur-list, 1);
+	@breakpoint-width:  extract(@cur-list, 2);
+	@media only screen and (min-width:~"@{breakpoint-width}px") {
+		.set-modified-paddings(length(@u__multiplier-list), ~"--@{breakpoint-name}");
+	}
+}
+
+.set-modified-paddings(length(@u__multiplier-list));
+.make-responsive-paddings(length(@bp__bp-list)); // launch the loop for default paddings
+
