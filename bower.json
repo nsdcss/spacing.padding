@@ -3,16 +3,8 @@
   "version": "0.1.0",
   "main": "spacing.padding.less",
   "author": "Nikolaj Sokolowski",
-<<<<<<< HEAD
   "license": "MIT",
   "dependencies": {
     "nsdcss-core-variables": "https://github.com/nsdcss/core.variables.git"
-  },
-  "nsdcss": {
-    "order": "010",
-    "scope": "framework"
   }
-=======
-  "license": "MIT"
->>>>>>> 5ca58f8135ee68c5872a231fbc51ec3294302218
 }
